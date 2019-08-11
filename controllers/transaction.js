@@ -74,6 +74,29 @@ exports.create = async function(req, res) {
     })
 }
 
+exports.purchase = async function(req, res) {
+    models.transaction.findOne({
+        where: {
+            id: req.params.id
+        }
+    }).then(function (result) {
+        if(req.body.purchaseAmount < result.dataValues.totalOrder) {
+            res.send({
+                message: "Payment rejected, purchase amount is less than total order"
+            })
+        } else if(result.status == "Purchases") {
+            res.send({
+                message: "Payment rejected, order already paid"
+            })
+        }
+        else {
+            result.status = "Purchases";
+            result.save();
+            res.send(result);
+        }
+    })
+}
+
 async function asyncForEach(array, callback) {
     for (let index = 0; index < array.length; index++) {
       await callback(array[index], index, array);
