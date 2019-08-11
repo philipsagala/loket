@@ -4,9 +4,8 @@ module.exports = {
     return queryInterface.createTable('transactions', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       ticketId: {
         type: Sequelize.INTEGER,
@@ -14,6 +13,9 @@ module.exports = {
           model: 'tickets',
           key: 'id'
         }
+      },
+      status: {
+        type: Sequelize.STRING
       },
       totalOrder: {
         type: Sequelize.INTEGER

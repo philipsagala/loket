@@ -25,6 +25,9 @@ module.exports = {
       price: {
         type: Sequelize.INTEGER
       },
+      openSeat: {
+        type: Sequelize.INTEGER
+      },
       availableSeat: {
         type: Sequelize.INTEGER
       },

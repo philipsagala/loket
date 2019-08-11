@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   transactionDetail.associate = function(models) {
     transactionDetail.belongsTo(models.transaction);
+    transactionDetail.belongsTo(models.ticket);
   };
   return transactionDetail;
 };

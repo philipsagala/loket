@@ -1,3 +1,6 @@
+let _ = require('lodash');
+let uuid = require('short-uuid');
+
 var models = require('../models');
 
 exports.list = function(req, res) {
@@ -20,16 +23,59 @@ exports.getOne = function(req, res) {
     })
 }
 
-exports.create = function(req, res) {
-    // models.transaction.create({
-    //     eventId: req.params.id,
-    //     name: req.body.name,
-    //     type: req.body.type,
-    //     price: req.body.price,
-    //     availableSeat: req.body.availableSeat
-    // }).then(function (result) {
-    //   res.json({
-    //       id: result.get('id')
-    //   })
-    // })
+exports.create = async function(req, res) {
+    var generatorId = uuid();
+
+    await asyncForEach(req.body, async function(value) {
+        var ticket = await models.ticket.findOne({
+            where: {
+                id: value.ticketId
+            }})
+        
+        var price = ticket.dataValues.price;
+        var availableSeat = ticket.dataValues.availableSeat;
+        value.currentSeat = availableSeat - value.qty;
+
+        if(value.currentSeat < 0) {
+            console.log('Seat not available');
+        }
+
+        value.id = await generatorId.uuid();
+        value.totalPrice = await price * value.qty;
+        
+    });
+
+    var totalOrder = _.sumBy(req.body, function(o) { return o.totalPrice; })
+    
+    models.transaction.create({
+        id: generatorId.generate(),
+        totalOrder: totalOrder,
+        status: "Awaiting Payment"
+    }).then(async function (result) {
+        await asyncForEach(req.body, async function(value) {
+            models.transactionDetail.create({
+                id: value.id,
+                transactionId: result.get('id'),
+                ticketId: value.ticketId,
+                qty: value.qty,
+                totalPrice: value.totalPrice
+            }).then(function (result) {
+                models.ticket.update(
+                    {availableSeat: value.currentSeat},
+                    {where: {id: value.ticketId } }
+                )
+            });
+        });
+
+        res.json({
+            id: result.get('id'),
+            transactionDetail: req.body
+        })
+    })
+}
+
+async function asyncForEach(array, callback) {
+    for (let index = 0; index < array.length; index++) {
+      await callback(array[index], index, array);
+    }
 }

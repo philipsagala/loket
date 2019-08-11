@@ -5,6 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     type: DataTypes.STRING,
     price: DataTypes.INTEGER,
+    openSeat: DataTypes.INTEGER,
     availableSeat: DataTypes.INTEGER
   }, {});
   ticket.associate = function(models) {

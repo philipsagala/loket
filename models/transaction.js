@@ -2,7 +2,8 @@
 
 module.exports = (sequelize, DataTypes) => {
   const transaction = sequelize.define('transaction', {
-    totalOrder: DataTypes.INTEGER
+    totalOrder: DataTypes.INTEGER,
+    status: DataTypes.STRING
   }, {});
   transaction.associate = function(models) {
     transaction.belongsTo(models.ticket);

@@ -4,12 +4,11 @@ module.exports = {
     return queryInterface.createTable('transactionDetails', {
       id: {
         allowNull: false,
-        autoIncrement: true,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       transactionId: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING,
         references: {
           model: 'transactions',
           key: 'id'

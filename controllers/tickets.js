@@ -23,13 +23,13 @@ exports.getOne = function(req, res) {
 }
 
 exports.create = function(req, res) {
-    console.log(req.params.id)
     models.ticket.create({
         eventId: req.params.id,
         name: req.body.name,
         type: req.body.type,
         price: req.body.price,
-        availableSeat: req.body.availableSeat
+        openSeat: req.body.openSeat,
+        availableSeat: req.body.openSeat
     }).then(function (result) {
       res.json({
           id: result.get('id')
