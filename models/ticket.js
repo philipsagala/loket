@@ -1,4 +1,5 @@
 'use strict';
+
 module.exports = (sequelize, DataTypes) => {
   const ticket = sequelize.define('ticket', {
     name: DataTypes.STRING,
@@ -7,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
     availableSeat: DataTypes.INTEGER
   }, {});
   ticket.associate = function(models) {
-    // associations can be defined here
+    ticket.belongsTo(models.event);
   };
   return ticket;
 };

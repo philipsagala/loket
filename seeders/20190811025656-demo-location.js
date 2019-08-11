@@ -17,7 +17,10 @@ module.exports = {
       {
         name: 'Plaza Festival',
         city: 'Jakarta',
+        province: 'DKI Jakarta',
         address: 'Epicentrum, Jl. H. R. Rasuna Said No.Kav. 22, RT.2/RW.5, Karet Kuningan, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12940',
+        longitude: '-6.2210176',
+        latitude: '106.8308354',
         createdAt: new Date(),
         updatedAt: new Date()
       }
