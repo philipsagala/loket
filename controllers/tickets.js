@@ -2,12 +2,15 @@ var models = require('../models');
 
 exports.list = function(req, res) {
     models.ticket.findAll().then(function(result) {
-        if (result !== null) {
-            res.json({
-                result: "Ticket not found"
-            })
+        if (result) {
+            res.send({
+                message: "Success",
+                data: result
+            });
         } else {
-            res.send(result);
+            res.send({
+                message: "Ticket not found"
+            })
         }
     })
 }
@@ -31,8 +34,11 @@ exports.create = function(req, res) {
         openSeat: req.body.openSeat,
         availableSeat: req.body.openSeat
     }).then(function (result) {
-      res.json({
-          id: result.get('id')
+      res.send({
+            message: "Success",
+            data: {
+                id: result.get('id')
+            }
       })
     })
 }
@@ -49,12 +55,12 @@ exports.update = function(req, res) {
             }
         }).then(function (result) {
             if(result == null) {
-                res.json({
-                    result: "Nothing to update data not found"
+                res.send({
+                    message: "Nothing to update data not found"
                 })
             } else {
-                res.json({
-                    result: "Update was successful",
+                res.send({
+                    message: "Update was successful",
                     data: result
                 })
             }

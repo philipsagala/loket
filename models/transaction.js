@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {});
   transaction.associate = function(models) {
     transaction.belongsTo(models.ticket);
+    transaction.hasMany(models.transactionDetail);
   };
   return transaction;
 };

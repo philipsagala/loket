@@ -3,9 +3,14 @@ var models = require('../models');
 exports.list = function(req, res) {
     models.location.findAll().then(function(result) {
         if (result) {
-            res.send(result);
+            res.send({
+                message: "Success",
+                data: result
+            });
         } else {
-            res.send("location not found");
+            res.send({
+                message: "Location not found"
+            });
         }
     })
 }
@@ -16,7 +21,10 @@ exports.getOne = function(req, res) {
             id: req.params.id
         }
     }).then(function (result) {
-        res.send(result);
+        res.send({
+            message: "Success",
+            data: result
+        });
     })
 }
 
@@ -29,8 +37,11 @@ exports.create = function(req, res) {
         longitude: req.body.longitude,
         latitude: req.body.latitude,
     }).then(function (result) {
-      res.json({
-          id: result.get('id')
+      res.send({
+          message: "Success",
+          data: {
+            id: result.get('id')
+          }
       })
     })
 }
@@ -46,13 +57,13 @@ exports.update = function(req, res) {
                 id: req.params.id
             }
         }).then(function (result) {
-            if(result == null) {
-                res.json({
-                    result: "Nothing to update data not found"
+            if(result === null) {
+                res.send({
+                    message: "Nothing to update data not found"
                 })
             } else {
-                res.json({
-                    result: "Update was successful",
+                res.send({
+                    message: "Update was successful",
                     data: result
                 })
             }
