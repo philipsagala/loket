@@ -6,9 +6,9 @@ I decide to change the endpoint of each Web Service API, the changes become like
 
 Endpoint | Relative Path | Method | Description 
 ---|---|---|---
-Get all location | /location | GET | Endpoint to get all available location 
-Get specific location by ID | /location/:id| GET| Get specific location by ID 
-Create location | /location| POST | Endpoint to create new location 
+Get all location | */location* | GET | Endpoint to get all available location 
+Get specific location by ID | */location/:id* | GET| Get specific location by ID 
+Create location | */location* | POST | Endpoint to create new location 
 Update location | /location | PUT | Endpoint to update location 
 Get all Event | /event | GET | Endpoint to get all event 
 Get Event | /event/:id | GET | Endpoint to retrieve event information, Including location data and ticket data. :id = eventId 
