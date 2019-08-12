@@ -3,7 +3,7 @@
 Installation, setup, and settings is written in README.md
 
 I decide to change the endpoint of each Web Service API, the changes become like this:
-| Endpoint | Relative Path | Method | Description |
+Endpoint | Relative Path | Method | Description 
 |---|---|---|---|
 Get all location | /location | GET | Endpoint to get all available location 
 Get specific location by ID | /location/:id| GET| Get specific location by ID 
