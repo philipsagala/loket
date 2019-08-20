@@ -19,9 +19,23 @@ Download url for PostgreSQL [enter link description here](https://www.postgresql
     git clone https://github.com/philipsagala/loket.git
     npm install
     npm run build
+    npm start
  
  Locate config/config.json to Update database configuration, change the config on development 
  
 **npm run build** This application came with ready set of dummy data. This is custom command for database migration and also data seeder. After executing this command you can start to create new transaction.
 
 Database schema is stored in root directory with name database.sql
+
+## Unit testing
+
+#### Run Command
+    npm install
+    npm run build
+    npm test
+    
+#### Coverage Test result
+![Coverage Result](./coverage-result.JPG?raw=true 'Coverage Result')
+
+
+ 
